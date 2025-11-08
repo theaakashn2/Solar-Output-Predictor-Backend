@@ -25,6 +25,10 @@ FEATURE_NAMES = [
     "solar_radiation_kWh_m2"
 ]
 
+@app.route('/ping')
+def ping():
+    return jsonify({"status": "ok"}), 200
+    
 @app.route("/predict", methods=["POST"])
 def predict():
     try:
@@ -54,3 +58,4 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
