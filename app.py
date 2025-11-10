@@ -42,7 +42,7 @@ def predict():
 
         # Extract, scale and transform input values
         input_array = np.array([data[f] for f in FEATURE_NAMES]).reshape(1, -1)
-        X = pd.Dataframe(input_array, columns=FEATURE_NAMES)
+        X = pd.DataFrame(input_array, columns=FEATURE_NAMES)
         X_scaled = scaler.transform(X)
         X_poly = poly.transform(X_scaled)
 
@@ -59,6 +59,7 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
