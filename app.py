@@ -2,6 +2,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import numpy as np
+import pandas as pd
 import joblib
 
 #App Initialisation
@@ -40,8 +41,8 @@ def predict():
             return jsonify({"error": f"Missing features: {', '.join(missing)}"}), 400
 
         # Extract, scale and transform input values
-        input_values = [data[f] for f in FEATURE_NAMES]
-        X = np.array(input_values).reshape(1, -1)
+        input_array = np.array([data[f] for f in FEATURE_NAMES]).reshape(1, -1)
+        X = pd.Dataframe(input_array,columns = FEATURE_NAMES)
         X_scaled = scaler.transform(X)
         X_poly = poly.transform(X_scaled)
 
@@ -58,4 +59,5 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
