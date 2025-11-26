@@ -4,27 +4,6 @@ from flask_cors import CORS
 import numpy as np
 import pandas as pd
 import joblib
-import time
-import random
-import requests
-
-def send_random_package():
-    
-    wait = random.uniform(0, 25)
-    time.sleep(wait)
-
-    payload = {
-        "location_type": random.choice([0.8,1,1.2]),
-        "avg_temperature_C": random.uniform(0, 30),
-        "cloud_coverage_percent": random.uniform(0, 100),
-        "wind_speed_kmph": random.uniform(0, 30),
-        "humidity_percent": random.uniform(10, 100),
-        "panel_age_years": random.uniform(0, 15),
-        "panel_efficiency_percent": random.uniform(10, 23),
-        "solar_radiation_kWh_m2": random.uniform(0, 250)
-    }
-
-    r = requests.post("https://solar-output-predictor-rpmh.onrender.com/predict", json=payload, timeout = 29)
 
 #App Initialisation
 app = Flask(__name__)
@@ -49,7 +28,6 @@ FEATURE_NAMES = [
 
 @app.route('/ping')
 def ping():
-    send_random_package()
     return jsonify({"status": "ok"}), 200
     
 @app.route("/predict", methods=["POST"])
@@ -81,9 +59,9 @@ def predict():
         
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug = True)
    
+
 
 
 
