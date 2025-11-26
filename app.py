@@ -10,7 +10,7 @@ import requests
 
 def send_random_package():
     
-    wait = random.uniform(300, 1200)
+    wait = random.uniform(0, 25)
     time.sleep(wait)
 
     payload = {
@@ -24,7 +24,7 @@ def send_random_package():
         "solar_radiation_kWh_m2": random.uniform(0, 250)
     }
 
-    r = requests.post("https://solar-output-predictor-rpmh.onrender.com/predict", json=payload)
+    r = requests.post("https://solar-output-predictor-rpmh.onrender.com/predict", json=payload, timeout = 29)
 
 #App Initialisation
 app = Flask(__name__)
@@ -84,6 +84,7 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
    
+
 
 
 
