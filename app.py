@@ -79,11 +79,12 @@ def send_random_package():
 
     r = requests.post("https://solar-output-predictor-rpmh.onrender.com/predict", json=payload)
 
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
+
 while True:
     send_random_package()
-
-if __name__ == "__main__":
-    app.run(debug=True)
 
 
 
